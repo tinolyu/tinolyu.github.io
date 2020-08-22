@@ -1,301 +1,301 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
+    <!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tino Lyu&#39;s blog">
-    <meta name="keyword"  content="al2co33">
-    <link rel="shortcut icon" href="/img/favicon.ico">
-
-    <title>
-        
-        Minesweeper Game Design - 铝铝的博客 | Tino Lyu&#39;s blog
-        
-    </title>
-
-    <!-- Custom CSS -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="人生苦短，我玩扫雷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Minesweeper Game Design">
+<meta property="og:url" content="http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/index.html">
+<meta property="og:site_name" content="Tino Lyu&#39;s blog">
+<meta property="og:description" content="人生苦短，我玩扫雷">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-22T06:19:00.000Z">
+<meta property="article:modified_time" content="2020-08-22T10:42:27.065Z">
+<meta property="article:author" content="Tino Lyu">
+<meta property="article:tag" content="game">
+<meta name="twitter:card" content="summary">
     
-<link rel="stylesheet" href="/css/aircloud.css">
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Minesweeper Game Design</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
 
     
-<link rel="stylesheet" href="/css/gitment.css">
-
-    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
-    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
-    <!-- ga & ba script hoook -->
-    <script></script>
+    <!-- rss -->
+    
+    
 <meta name="generator" content="Hexo 5.1.0"></head>
 
-<body>
-
-<div class="site-nav-toggle" id="site-nav-toggle">
-    <button>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-        <span class="btn-bar"></span>
-    </button>
-</div>
-
-<div class="index-about">
-    <i> 今は大事 </i>
-</div>
-
-<div class="index-container">
+<body class="max-width mx-auto px3 ltr">
     
-    <div class="index-left">
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
         
-<div class="nav" id="nav">
-    <div class="avatar-name">
-        <div class="avatar ">
-            <img src="/img/avatar.jpg" />
-        </div>
-        <div class="name">
-            <i>Tino Lyu</i>
-        </div>
-    </div>
-    <div class="contents" id="nav-content">
-        <ul>
-            <li >
-                <a href="/">
-                    <i class="iconfont icon-shouye1"></i>
-                    <span>主页</span>
-                </a>
-            </li>
-            <li >
-                <a href="/tags">
-                    <i class="iconfont icon-biaoqian1"></i>
-                    <span>标签</span>
-                </a>
-            </li>
-            <li >
-                <a href="/archive">
-                    <i class="iconfont icon-guidang2"></i>
-                    <span>存档</span>
-                </a>
-            </li>
-            <li >
-                <a href="/about/">
-                    <i class="iconfont icon-guanyu2"></i>
-                    <span>关于</span>
-                </a>
-            </li>
-            
-            <li>
-                <a id="search">
-                    <i class="iconfont icon-sousuo1"></i>
-                    <span>搜索</span>
-                </a>
-            </li>
-            
-        </ul>
-    </div>
-    
-        <div id="toc" class="toc-article">
-    
-</div>
-    
-</div>
-
-
-<div class="search-field" id="search-field">
-    <div class="search-container">
-        <div class="search-input">
-            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
-            <input id="search-input"/>
-            <span id="begin-search">搜索</span>
-        </div>
-        <div class="search-result-container" id="search-result-container">
-
-        </div>
-    </div>
-</div>
-
-        <div class="index-about-mobile">
-            <i> 今は大事 </i>
-        </div>
-    </div>
-    
-    <div class="index-middle">
-        <!-- Main Content -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
+        <li><a class="icon" href="/2020/08/22/2020-05-06-2020%E4%B8%8A%E5%8D%8A%E5%9C%BA%E7%9A%84%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/06/22/2020-05-06-2020%E4%B8%8B%E5%8D%8A%E5%9C%BA%E7%9A%84%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&text=Minesweeper Game Design"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&is_video=false&description=Minesweeper Game Design"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Minesweeper Game Design&body=Check out this article: http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&name=Minesweeper Game Design&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&t=Minesweeper Game Design"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
 
-<div class="post-container">
-    <div class="post-title">
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
         Minesweeper Game Design
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tino Lyu's blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-08-22T06:19:00.000Z" itemprop="datePublished">2020-08-22</time>
+        
+      
     </div>
 
-    <div class="post-meta">
-        <span class="attr">发布于：<span>2020-08-22 14:19:00</span></span>
-        
-        <span class="attr">标签：/
-        
-        <a class="tag" href="/tags/#game" title="game">game</a>
-        <span>/</span>
-        
-        
-        </span>
-        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
-</span>
-</span>
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%B8%B8%E6%88%8F/">游戏</a>
     </div>
-    <div class="post-content ">
-        <p>小吕很爱玩儿游戏，这些年来，3a大作玩过不少，有口碑的独立游戏也有过接触，但唯一始终无法放弃的只有扫雷。<br>2019年10月的某天，我在微博痛心疾首的写下下文：<br><em>2017年的冬天，那时的我没有24小时热水的家，不会继承多态，for循环可以看一天，日子很简单。C++期末前夜，我在对外经济贸易大学西门外的咖啡陪你下载了windows应用商店的扫雷，并在6个小时后第一次通关了扫雷（耗时800秒），虽然C++题库还差63885道题没有看。从那天起，我玩啊玩啊，在中级微观经济学课上，在金融风险管理课上，在数据结构课上，我玩花了眼，玩坏了手，玩掉了发，但我就是…不能……停…下…来，越焦虑我就越想扫，越扫我就越焦虑，越焦虑越扫，越扫越焦虑……在异国他乡，我又一次深刻地忏悔，我告诉自己，也告诉别人：年纪轻轻的，别碰扫雷。</em>  </p>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/game/" rel="tag">game</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>小吕很爱玩儿游戏，这些年来，3a大作玩过不少，有口碑的独立游戏也有过接触，但唯一始终无法放弃的只有扫雷。2019年10月的某天，我在微博痛心疾首的写下下文：  </p>
+<blockquote>
+<p>2017年的冬天，那时的我没有24小时热水的家，不会继承多态，for循环可以看一天，日子很简单。C++期末前夜，我在对外经济贸易大学西门外的咖啡陪你下载了windows应用商店的扫雷，并在6个小时后第一次通关了扫雷（耗时800秒），虽然C++题库还差63885道题没有看。从那天起，我玩啊玩啊，在中级微观经济学课上，在金融风险管理课上，在数据结构课上，我玩花了眼，玩坏了手，玩掉了发，但我就是…不能……停…下…来，越焦虑我就越想扫，越扫我就越焦虑，越焦虑越扫，越扫越焦虑……在异国他乡，我又一次深刻地忏悔，我告诉自己，也告诉别人：年纪轻轻的，别碰扫雷。    </p>
+</blockquote>
 <p>很凑巧，今天在leetcode上偶遇一道关于<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minesweeper/">扫雷的题目</a>，dfs算法已经摆这儿了，我想这是个机会自己想想做出来一个属于自己的扫雷游戏。<br>先把题解写这儿：  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span>[][] updateBoard(<span class="keyword">char</span>[][] board, <span class="keyword">int</span>[] click) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = click[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> y = click[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(board[x][y] == <span class="string">&#x27;M&#x27;</span>) &#123;</span><br><span class="line">            board[x][y] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">            <span class="keyword">return</span> board;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(board, click[<span class="number">0</span>], click[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> board;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] x_mov = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">1</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] y_mov = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(isInside(board, x + x_mov[i], y + y_mov[i])) &#123;</span><br><span class="line">                <span class="keyword">if</span>(board[x + x_mov[i]][y + y_mov[i]] == <span class="string">&#x27;M&#x27;</span>) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count == <span class="number">0</span>) &#123;</span><br><span class="line">            board[x][y] = <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(isInside(board, x + x_mov[i], y + y_mov[i]) &amp;&amp; board[x + x_mov[i]][y + y_mov[i]] == <span class="string">&#x27;E&#x27;</span>) &#123;</span><br><span class="line">                    dfs(board, x + x_mov[i], y + y_mov[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            board[x][y] = (<span class="keyword">char</span>)(count + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isInside</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> x &gt;= <span class="number">0</span> &amp;&amp; x &lt; board.length &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; board[<span class="number">0</span>].length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+  </div>
+</article>
+
+
+
         
-            <div class="donate-container">
-    <div class="donate-button">
-        <button id="donate-button">赞赏</button>
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
     </div>
-    <div class="donate-img-container hide" id="donate-img-container">
-        <img id="donate-img" src="" data-src="/img/donate.jpg">
-        <p> 感谢鼓励 </p>
+
+    <div id="toc-footer" style="display: none">
+      
     </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&text=Minesweeper Game Design"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&is_video=false&description=Minesweeper Game Design"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Minesweeper Game Design&body=Check out this article: http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&title=Minesweeper Game Design"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&name=Minesweeper Game Design&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.tinoyu.com/2020/08/22/2020-08-22-Minesweeper-Game-Design/&t=Minesweeper Game Design"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
 </div>
-        
-        <br />
-        <div id="comment-container">
-        </div>
-        <div id="disqus_thread"></div>
-
-        <div id="lv-container">
-        </div>
-
-    </div>
-</div>
-
-    </div>
-</div>
-
-
-<footer class="footer">
-    <ul class="list-inline text-center">
-        
-        <li>
-            <a target="_blank" href="https://twitter.com/iconie_alloy">
-                            <span class="fa-stack fa-lg">
-                                <i class="iconfont icon-twitter"></i>
-                            </span>
-            </a>
-        </li>
-        
-        
-        <li>
-            <a target="_blank" href="https://www.zhihu.com/people/ai-er-lan-xue-da">
-                            <span class="fa-stack fa-lg">
-                                 <i class="iconfont icon-zhihu"></i>
-                            </span>
-            </a>
-        </li>
-        
 
         
-        <li>
-            <a target="_blank" href="http://weibo.com/3286578617">
-                            <span class="fa-stack fa-lg">
-                                  <i class="iconfont icon-weibo"></i>
-                            </span>
-            </a>
-        </li>
-        
-
-        
-        <li>
-            <a target="_blank" href="https://www.facebook.com/xiaotao.nie.5">
-                            <span class="fa-stack fa-lg">
-                                <i class="iconfont icon-facebook"></i>
-                            </span>
-            </a>
-        </li>
-        
-
-        
-        <li>
-            <a target="_blank"  href="https://github.com/AirCloud">
-                            <span class="fa-stack fa-lg">
-                                <i class="iconfont icon-github"></i>
-                            </span>
-            </a>
-        </li>
-        
-
-        
-        <li>
-            <a target="_blank"  href="https://www.linkedin.com/in/tianniu-tino-lyu">
-                            <span class="fa-stack fa-lg">
-                                <i class="iconfont icon-linkedin"></i>
-                            </span>
-            </a>
-        </li>
-        
-
-    </ul>
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-    <p>
-        <span>/</span>
-        
-        <span><a target="_blank" rel="noopener" href="https://www.10000h.top">10000H</a></span>
-        <span>/</span>
-        
-        <span><a target="_blank" rel="noopener" href="https://niexiaotao.com">Xiaotao&#39;s Page</a></span>
-        <span>/</span>
-        
-        <span><a href="#">It helps SEO</a></span>
-        <span>/</span>
-        
-    </p>
     
-    <p>
-        <span id="busuanzi_container_site_pv">
-            <span id="busuanzi_value_site_pv"></span>PV
-        </span>
-        <span id="busuanzi_container_site_uv">
-            <span id="busuanzi_value_site_uv"></span>UV
-        </span>
-        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+    2016-2020
+    Tino Lyu
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
 </footer>
 
+    </div>
+    <!-- styles -->
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
 
 
 </body>
-
-<script>
-    // We expose some of the variables needed by the front end
-    window.hexo_search_path = "search.json"
-    window.hexo_root = "/"
-    window.isPost = true
-</script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-
-<script src="/js/index.js"></script>
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-    <script>
-        /**
-         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-        */
-        if( '' || '')
-        var disqus_config = function () {
-            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-
-        (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://airclouds-blog.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-
-
-
 </html>
