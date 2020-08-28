@@ -241,8 +241,6 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
@@ -353,6 +351,29 @@
   </div>
 </div>
   
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'all',
+      order: 'list',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"ワンモアタイム","artist":"斉藤和義","url":"/songs/0.mp3","cover":"/img/songs/0.jpg"},{"name":"空に星が綺麗~悲しい吉祥寺~","artist":"斉藤和義","url":"/songs/1.mp3","cover":"/img/songs/1.jpg"},{"name":"歌うたいのバラッド","artist":"斉藤和義","url":"/songs/2.mp3","cover":"/img/songs/2.jpg"}]
+    });
+  }
+</script>
 
   
 
@@ -502,6 +523,21 @@
 
 
 
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
