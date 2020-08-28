@@ -57,7 +57,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Tino Lyu's Blog</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>铝铝的博客</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -76,7 +76,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -88,7 +88,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -100,7 +100,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -112,7 +112,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      412 字
+      446 字
     </span>
   
 
@@ -202,7 +202,9 @@
             <h1 style="display: none">Cloud Computing笔记 - MapReduce &amp; Hadoop</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>云计算这课上到现在基本算是结束了，这节课上下来的感觉并没传说中那么恐怖，当然也没有多轻松。<br>确实接触了挺多新的工具和知识，HBase/Spark/Hadoop/MapReduce/Docker/k8s等等等等，最尴尬的是面试的时候会被说学了很多但哪一个都没有深入的研究下去。写写博客总结一下这一学期cc的project，顺便也再学习一遍。</p>
+              <p>主要是15-619（15-319）这节课的内容，我这么懒的人，不一定能完完整整都记下来哈哈哈</p>
+<a id="more"></a>  
+<p>云计算这课上到现在基本算是结束了，这节课上下来的感觉并没传说中那么恐怖，当然也没有多轻松。<br>确实接触了挺多新的工具和知识，HBase/Spark/Hadoop/MapReduce/Docker/k8s等等等等，最尴尬的是面试的时候会被说学了很多但哪一个都没有深入的研究下去。写写博客总结一下这一学期cc的project，顺便也再学习一遍。</p>
 <h3 id="MapReduce-amp-Hadoop"><a href="#MapReduce-amp-Hadoop" class="headerlink" title="MapReduce &amp; Hadoop"></a>MapReduce &amp; Hadoop</h3><p><img src="https://s3.amazonaws.com/cmucc-public/15619public/webcontent/mapReduce_analytics_engine.png" srcset="/img/loading.gif" alt="MapReduce"><br>MapReduce由两部分组成，Map Phase和Reduce Phase，Map Phase由一个或多个相同的Map task组成，Reduce Phase则由零个或多个相同的Reduce task组成。<br>Map就是把数据转为Key/Value Pair的形式，Reduce则是完成一个类似于group by的操作。<br>以经典的word count为例：  </p>
 <ul>
 <li>Map task的输入为”the boy ate the apple”  </li>
@@ -443,7 +445,7 @@
       ],
       cursorChar: "_",
       typeSpeed: 70,
-      loop: false,
+      loop: true,
     });
     typed.stop();
     $(document).ready(function () {
@@ -502,6 +504,57 @@
 
 
 
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
 
 
 
