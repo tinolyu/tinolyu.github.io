@@ -211,7 +211,7 @@
 <li>Map task的输出为(the, 1), (boy, 1), (ate, 1), (the, 1), (apple, 1)</li>
 <li>经过sort和shuffle stage，具有相同key的intermediate Key/Value pairs将被放入同一个reducer中</li>
 <li>The reduce task will aggregate the counts for the same word </li>
-<li>If you had a single reduce task that is processing all possible keys, then the input will be (the, list(1,1)), (boy, list(1)), (ate, list(1)), (apple, list(1)) and the output will be: (the, 2), (boy, 1), (ate, 1), (apple, 1)<br><img src="https://upload.cc/i1/2020/04/05/MgQnEa.png" srcset="/img/loading.gif" alt="MapReduce">   </li>
+<li>If you had a single reduce task that is processing all possible keys, then the input will be (the, list(1,1)), (boy, list(1)), (ate, list(1)), (apple, list(1)) and the output will be: (the, 2), (boy, 1), (ate, 1), (apple, 1)<br><img src="https://s1.ax1x.com/2020/08/28/dIsof1.png" srcset="/img/loading.gif" alt="MapReduce">   </li>
 </ul>
 <p>在MapReduce中还有一步操作是Combine，Combine使用的方法就是Reduce。我们可以在Map Phase中先对key进行aggregate，如下图：<br><img src="https://s3.amazonaws.com/cmucc-public/15619public/webcontent/p12/map-reduce-combiner.png" srcset="/img/loading.gif" alt="MapReduce"> </p>
 <p>需要根据情况判断是否使用Combiner。在word count这个例子中，使用combiner可以提升效率，总体的和是部分和的加总。但如果我们算的是平均值，使用combiner则会导致结果错误，总体的平均并不是部分平均值的平均。</p>

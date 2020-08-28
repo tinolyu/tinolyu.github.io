@@ -251,7 +251,7 @@
 	&#125;
 &#125;</code></pre></div>
 
-<h3 id="Improvement-Shell-Sort"><a href="#Improvement-Shell-Sort" class="headerlink" title="Improvement: Shell Sort"></a>Improvement: Shell Sort</h3><p>Why not make our array partially sorted and than use insertion sort?<br>🤔Shellsort: h-sort array for decreasing sequence of values of h.<br><img src="https://upload.cc/i1/2019/10/07/DlkZeV.png" srcset="/img/loading.gif" alt="3-sorting">  </p>
+<h3 id="Improvement-Shell-Sort"><a href="#Improvement-Shell-Sort" class="headerlink" title="Improvement: Shell Sort"></a>Improvement: Shell Sort</h3><p>Why not make our array partially sorted and than use insertion sort?<br>🤔Shellsort: h-sort array for decreasing sequence of values of h.<br><img src="https://s1.ax1x.com/2020/08/28/dIywjK.png" srcset="/img/loading.gif" alt="3-sorting">  </p>
 <p>Which increment sequence to use?  <strong>3x + 1</strong> (1, 4, 13, 40, 121, 364, …)  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>
 <span class="hljs-function"></span>&#123;
@@ -273,7 +273,7 @@
 &#125;</code></pre></div>
 <p>The worst-case number of compares used by shellsort with 3x+1 increment is <strong>O( N^(3/2) )</strong></p>
 <h1 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h1><p>As its name, there are two steps in the merge sort (omg, just TWO steps) - merge and sort.  </p>
-<h3 id="STEP-ONE-Merge"><a href="#STEP-ONE-Merge" class="headerlink" title="STEP ONE: Merge"></a>STEP ONE: Merge</h3><p>Consider this question, when there are two already sorted array, assigned a[i] and b[j], and we want to sort them into one big array. This is a simple question, you need two pointers and find which pointer is pointed to a smaller item, select this element and add this pointer. And also, we need extra space to store that element.<br>Now consider the same question in one single array.<br><img src="https://upload.cc/i1/2019/10/07/4957Hm.png" srcset="/img/loading.gif" alt="enter description here"><br>We need to sort these two parts and get a full-sorted array. Given two sorted subarrays a[lo] to a[mid] and a[mid+1] to a[hi], replace with sorted subarray a[lo] to a[hi]. This is <strong>merge</strong>.  </p>
+<h3 id="STEP-ONE-Merge"><a href="#STEP-ONE-Merge" class="headerlink" title="STEP ONE: Merge"></a>STEP ONE: Merge</h3><p>Consider this question, when there are two already sorted array, assigned a[i] and b[j], and we want to sort them into one big array. This is a simple question, you need two pointers and find which pointer is pointed to a smaller item, select this element and add this pointer. And also, we need extra space to store that element.<br>Now consider the same question in one single array.<br><img src="https://s1.ax1x.com/2020/08/28/dIyDBD.png" srcset="/img/loading.gif" alt="enter description here"><br>We need to sort these two parts and get a full-sorted array. Given two sorted subarrays a[lo] to a[mid] and a[mid+1] to a[hi], replace with sorted subarray a[lo] to a[hi]. This is <strong>merge</strong>.  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(Comparable[] a, Comparable[] aux, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> mid, <span class="hljs-keyword">int</span> hi)</span></span>
 <span class="hljs-function"></span>&#123;
 	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = lo; k &lt;= hi; k++)
@@ -324,7 +324,7 @@
 &#125;</code></pre></div>
 
 
-<h1 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h1><h3 id="STEP-ONE-Shuffle-the-array"><a href="#STEP-ONE-Shuffle-the-array" class="headerlink" title="STEP ONE:  Shuffle the array"></a>STEP ONE:  Shuffle the array</h3><p><img src="https://upload.cc/i1/2019/10/07/fnmMWh.png" srcset="/img/loading.gif"><br>Make the array randomly sorted. For instance, if the array is increased, it would be inefficient, patitioning doesn’t do anything. Why not use insertion sort in this case?  </p>
+<h1 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h1><h3 id="STEP-ONE-Shuffle-the-array"><a href="#STEP-ONE-Shuffle-the-array" class="headerlink" title="STEP ONE:  Shuffle the array"></a>STEP ONE:  Shuffle the array</h3><p><img src="https://s1.ax1x.com/2020/08/28/dIyc4A.png" srcset="/img/loading.gif"><br>Make the array randomly sorted. For instance, if the array is increased, it would be inefficient, patitioning doesn’t do anything. Why not use insertion sort in this case?  </p>
 <p>*<strong>Knuth Shuffle</strong>: In iteration i, pick integer r between 0 and i uniformly at random.*</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shuffle</span><span class="hljs-params">(Obeject[] a)</span></span>
 <span class="hljs-function"></span>&#123;
@@ -363,7 +363,7 @@
 	sort(a, j + <span class="hljs-number">1</span>, hi);
 &#125;</code></pre></div>
 
-<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p><img src="https://upload.cc/i1/2019/10/07/Ja9Ovg.gif" srcset="/img/loading.gif">  </p>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p><img src="https://s1.ax1x.com/2020/08/28/dIyH4s.png" srcset="/img/loading.gif">  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Quick</span></span>
 <span class="hljs-class"></span>&#123;
 	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>
