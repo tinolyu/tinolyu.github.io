@@ -17,7 +17,7 @@
   <meta name="description" content="Tino Lyu&#39;s blog">
   <meta name="author" content="Tino Lyu">
   <meta name="keywords" content="">
-  <title>解决MySQL的encoding问题 - Tino Lyu&#39;s blog</title>
+  <title>2020年的读书总结 - Tino Lyu&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -148,8 +148,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-04-06 09:19" pubdate>
-      April 6, 2020 am
+    <time datetime="2020-08-22 17:10" pubdate>
+      August 22, 2020 pm
     </time>
   </div>
 
@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      160 字
+      1.4k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      14
        分钟
     </span>
   
@@ -199,32 +199,22 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">解决MySQL的encoding问题</h1>
+            <h1 style="display: none">2020年的读书总结</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>在load数据的时候发现MySQL无法正常显示emoji和日语、阿拉伯语等等的语言，主要原因是没有使用utf8mb4编码，可以通过以下操作解决                                                                                                                                                                                                      </p>
-<ol>
-<li><p>查看当前MySQL的编码，会发现使用的是latin  </p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;%character_set_%&#x27;</span>;</code></pre></div></li>
-<li><p>改变当前数据的encoding  </p>
-<div class="hljs"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">DATABASE</span> &lt;your_database&gt; <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8mb4 <span class="hljs-keyword">COLLATE</span> utf8mb4_unicode_ci;</code></pre></div></li>
-<li><p>修改配置文件 /etc/mysql/mysql.conf.d/mysqld.cnf<br>直接再最后加上：  </p>
-<div class="hljs"><pre><code class="hljs ini"><span class="hljs-section">[client]</span>  
-<span class="hljs-attr">default-character-set</span> = utf8mb4  
-<span class="hljs-section">[mysql]</span>  
-<span class="hljs-attr">default-character-set</span> = utf8mb4  
-<span class="hljs-section">[mysqld]</span>  
-<span class="hljs-attr">character-set-client-handshake</span> = <span class="hljs-literal">FALSE</span>  
-<span class="hljs-attr">character-set-server</span> = utf8mb4  
-<span class="hljs-attr">collation-server</span> = utf8mb4_unicode_ci</code></pre></div>
-</li>
-<li><p>重启MySQL  </p>
-<div class="hljs"><pre><code class="hljs routeros">sudo<span class="hljs-built_in"> service </span>restart mysql</code></pre></div>
-
-</li>
-</ol>
-<p>搞定！最后可以再确定一下encoding，应该会有如下的显示：   </p>
-<p><img src="https://upload.cc/i1/2020/04/06/dN9Eop.png" srcset="/img/loading.gif" alt="Encoding"></p>
+              <p>2020年上半场就要结束了，呆在隔离的酒店里不知道做些什么。这几个月过得很忙乱，Cloud Computing的project，实习的笔试面试，学不会的finance和economy，COVID-19，搁浅的日本之旅，事事难过事事过吧，只能这样安慰自己了。结果就是书没怎么读，写了一堆废话来找借口，隐瞒本人精神世界的空虚。<br>趁着在隔离，多读几本书，分享一下我的（没有任何意义的）感受，反正也不会有人看的：）  </p>
+<p><em>感谢微信读书！感谢新星出版社！有泄底！！！！泄底！！！泄底！！！</em>    </p>
+<h2 id="《刺青杀人事件》"><a href="#《刺青杀人事件》" class="headerlink" title="《刺青杀人事件》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/10518843/">刺青杀人事件</a>》</h2><p>为什么会读这本书呢，因为去年我心血来潮在左右胳膊文了两个图案。日本的刺青和普通的文身倒是不大一样，被叫做入れ墨，多见于黑社会成员的后背。这本推理的刺青更像一种艺术，是可以美到让人裱起来欣赏的杰作（当然是从死者身上扒去皮）。<br>密室杀人+身份调换，动过文身念头的人可能都会想到这种手法，有点乏味，但刺青图案背后的神话故事让这本书变得有点玄乎，蛮喜欢哈哈哈。  </p>
+<h2 id="《虹の歯ブラシ-上木らいち発散》"><a href="#《虹の歯ブラシ-上木らいち発散》" class="headerlink" title="《虹の歯ブラシ 上木らいち発散》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26285818/">虹の歯ブラシ 上木らいち発散</a>》</h2><p>这本书是绝对的年度最佳（虽然今年刚过去不到一半）！！！！！！！我找不到更🐂🍺的词汇去形容它，读完后我心情激动，久久不能平复！早坂吝是天才啊。<br>是色情小说吗？那可不合格，不够工口。是推理小说吗？并没有华丽的杀人手法，没有构造复杂的建筑物，甚至几篇根本没有杀人事件。<br>青は海とマニキュアの色 这一篇，是我看过的最强的叙诡，赤は上木らいち自身の色 这一篇则简直是作者的炫技了。<br>读它！<br>【txt下载】豆瓣民翻：<a target="_blank" rel="noopener" href="https://uploadpicuse.blob.core.windows.net/pictures/%E5%BD%A9%E8%99%B9%E7%89%99%E5%88%B7.txt">https://uploadpicuse.blob.core.windows.net/pictures/彩虹牙刷.txt</a><br>（机智地上传到了Azure blob）    </p>
+<h2 id="《尸人庄谜案》"><a href="#《尸人庄谜案》" class="headerlink" title="《尸人庄谜案》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/30396712/">尸人庄谜案</a>》</h2><p>因为神木DD演了电影版，我便慕名去看了原作小说。人设简直就是轻小说系，天才美少女侦探这种角色都出现了，竟然还不动画化？！故事背景确实很吸引人，生化危机环境下的推理小说，属于可以一口气读下去地那种类型。但这个手法呢，就一般吧，作为出道作蛮强的。</p>
+<h2 id="《我们盗走星座的理由》"><a href="#《我们盗走星座的理由》" class="headerlink" title="《我们盗走星座的理由》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/34860553/">我们盗走星座的理由</a>》</h2><p>这书名，多文艺，多清新，多有内涵！《相思病》还算ok，《妖精的学校》没读懂，看了这个<a target="_blank" rel="noopener" href="https://book.douban.com/review/12156015/">科普</a>，还是不懂，《骗子绅士》完全没印象了，《终焉童话》有点魔幻的推理，《我们盗走星座的理由》里的小男孩真的太会了，学习了。  </p>
+<h2 id="《斬首循環》"><a href="#《斬首循環》" class="headerlink" title="《斬首循環》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1794287/">斬首循環</a>》</h2><p> 时隔多年又一次读了西尾维新老师的书，这本是真·轻小说，手法很没劲，登场角色一个个的全是人设鲜明的美少女搭配一个废柴(?)男主，唉！怎么硕呢，我已经过了犯中二病的年纪了！  </p>
+<h2 id="《推理竞技场》"><a href="#《推理竞技场》" class="headerlink" title="《推理竞技场》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/30428949/">推理竞技场</a>》</h2><p>这本蛮有趣的，读完基本知道了推理小说的种种套路，N层反转，说起来我真的很喜欢有剧情反转的推理小说，虽然是伪解答，但能编出那么多伪解答也是辛苦作者了。<br>（结尾的真解答超展开是来搞笑的吗）  </p>
+<h2 id="《醉步男》"><a href="#《醉步男》" class="headerlink" title="《醉步男》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/30359030/">醉步男</a>》</h2><p>今年到目前读的唯一一本科幻小说，时间旅行那套，年纪大了不喜欢读费脑子的书，跳来跳去了，最后女主是个啥我也没读懂，唉！<br>附了一个恐怖小短篇《玩具修理者》，我蛮喜欢，有乙一内味儿了，够变态，够魔幻的。  </p>
+<h2 id="《非人类》"><a href="#《非人类》" class="headerlink" title="《非人类》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/33476138/">非人类</a>》</h2><p>绫辻行人的短篇集，很没劲，非常没劲，这就是没被收录的原因吧，没有一个有意思的故事。  </p>
+<h2 id="《赤朽叶家的传说》"><a href="#《赤朽叶家的传说》" class="headerlink" title="《赤朽叶家的传说》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/20440568/">赤朽叶家的传说</a>》</h2><p>难得读了一本纸质书，在从阿德莱德飞厦门的航班上看了一大半。以为是推理小说才开始读的，然后发现推理的情节只在最后10%。书不厚，但写了赤朽叶家的女人三个世代的故事，千里眼万叶，不良少女漫画家毛毬和普通的“我”。<br>去年去熊野古道徒步的时候感觉自己真实地沉浸在一种神秘的神话氛围里，我想赤朽叶家也应该是建在那样的地方。说起出云国啊，日本神话啊，我超超超超级感兴趣。    </p>
+<h2 id="《水母不会冻结》"><a href="#《水母不会冻结》" class="headerlink" title="《水母不会冻结》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/32494889/">水母不会冻结</a>》</h2><p>书名真是莫名其妙的。看到有人把这本书和绫辻行人的《十角馆事件》对比，那差得可不是一星半点，《十角馆》不管是华丽程度还是手法设计都比《水母》强n个level，我对欧美人名有阅读障碍也是一点，拜托日系推理别搞欧美人设了好不好！！！  </p>
+<h2 id="《独眼少女》"><a href="#《独眼少女》" class="headerlink" title="《独眼少女》"></a>《<a target="_blank" rel="noopener" href="https://book.douban.com/subject/25918073/">独眼少女</a>》</h2><p>去年读了好几本麻神的书，今年刚刚读了这一本。还还还还还是麻神最上手的崩坏流，反转反转反转，为了反转而反转，刚刚看到20%的进度就有解答，这能是真解答吗我说，推理也太随意了。女主：凶手是你 -&gt; 不对凶手其实是她 -&gt; 没想到吧其实是他 -&gt; 真正的凶手其实是我啦傻孩子，男主：种田静马-&gt;缩写就是种马了！-&gt;没有感情的生殖机器。男主很惨，栖苅一家更惨。</p>
 
             </div>
             <hr>
@@ -234,7 +224,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/mysql/">mysql</a>
+                      <a class="hover-with-bg" href="/categories/reading/">reading</a>
                     
                   </div>
                 
@@ -248,18 +238,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/11/2020-04-11-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">刷题记录</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/04/05/2020-04-05-%E4%BA%91%E8%AE%A1%E7%AE%97%20Cloud%20Computing/">
-                        <span class="hidden-mobile">Cloud Computing笔记 - MapReduce & Hadoop</span>
+                      <a href="/2020/08/22/2020-08-22-Minesweeper-Game-Design/">
+                        <span class="hidden-mobile">Minesweeper Game Design</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -430,7 +414,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "解决MySQL的encoding问题&nbsp;",
+        "2020年的读书总结&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

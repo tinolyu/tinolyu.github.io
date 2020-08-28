@@ -1,292 +1,677 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
-    <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Tino Lyu&#39;s blog">
+  <meta name="author" content="Tino Lyu">
+  <meta name="keywords" content="">
+  <title>Sorting Algorithms - Tino Lyu&#39;s blog</title>
 
-    <meta name="author" content="Tino Lyu">
-
-
-    <meta name="subtitle" content="今は大事">
-
-
-    <meta name="description" content="Tino Lyu's blog">
-
-
-
-<title>Sorting Algorithms | Tino Lyu&#39;s blog</title>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
 
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-    <link rel="icon" href="/favicon.ico">
-
-
-
-
-    <!-- stylesheets list from _config.yml -->
+  
     
-    <link rel="stylesheet" href="/css/style.css">
-    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
 
 
 
-    <!-- scripts list from _config.yml -->
-    
-    <script src="/js/script.js"></script>
-    
-    <script src="/js/tocbot.min.js"></script>
-    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
 
+<link  rel="stylesheet" href="/css/main.css" />
 
-    
-    
-        
-    
+<!-- 自定义样式保持在最底部 -->
 
 
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.1.0"></head>
+
+
 <body>
-    <div class="wrapper">
-        <header>
-    <nav class="navbar">
-        <div class="container">
-            <div class="navbar-header header-logo"><a href="/">Tino&#39;s Blog</a></div>
-            <div class="menu navbar-right">
-                
-                    <a class="menu-item" href="/archives">Posts</a>
-                
-                    <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
-                
-                    <a class="menu-item" href="/about">About</a>
-                
-                <input id="switch_default" type="checkbox" class="switch_default">
-                <label for="switch_default" class="toggleBtn"></label>
-            </div>
-        </div>
-    </nav>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Tino Lyu's Blog</strong>&nbsp;</a>
 
-    
-    <nav class="navbar-mobile" id="nav-mobile">
-        <div class="container">
-            <div class="navbar-header">
-                <div>
-                    <a href="/">Tino&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
-                </div>
-                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
-            </div>
-            <div class="menu" id="mobile-menu">
-                
-                    <a class="menu-item" href="/archives">Posts</a>
-                
-                    <a class="menu-item" href="/category">Categories</a>
-                
-                    <a class="menu-item" href="/tag">Tags</a>
-                
-                    <a class="menu-item" href="/about">About</a>
-                
-            </div>
-        </div>
-    </nav>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-</header>
-<script>
-    var mobileBtn = function f() {
-        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
-        var mobileMenu = document.getElementById("mobile-menu");
-        if(toggleMenu.classList.contains("active")){
-           toggleMenu.classList.remove("active")
-            mobileMenu.classList.remove("active")
-        }else{
-            toggleMenu.classList.add("active")
-            mobileMenu.classList.add("active")
-        }
-    }
-</script>
-        <div class="main">
-            <div class="container">
-    
-    
-        <div class="post-toc">
-    <div class="tocbot-list">
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/bg/example.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2019-10-06 19:54" pubdate>
+      October 6, 2019 pm
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
 </div>
 
-<script>
-    document.ready(
-        function () {
-            tocbot.init({
-                tocSelector: '.tocbot-list',
-                contentSelector: '.post-content',
-                headingSelector: 'h1, h2, h3, h4, h5',
-                collapseDepth: 1,
-                orderedList: false,
-                scrollSmooth: true,
-            })
-        }
-    )
-
-    function expand_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 6,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "collapse_toc()");
-        b.innerHTML = "Collapse all"
-    }
-
-    function collapse_toc() {
-        var b = document.querySelector(".tocbot-toc-expand");
-        tocbot.init({
-            tocSelector: '.tocbot-list',
-            contentSelector: '.post-content',
-            headingSelector: 'h1, h2, h3, h4, h5',
-            collapseDepth: 1,
-            orderedList: false,
-            scrollSmooth: true,
-        });
-        b.setAttribute("onclick", "expand_toc()");
-        b.innerHTML = "Expand all"
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-</script>
-    
-
-    
-    <article class="post-wrap">
-        <header class="post-header">
-            <h1 class="post-title">Sorting Algorithms</h1>
             
-                <div class="post-meta">
-                    
-                        Author: <a itemprop="author" rel="author" href="/">Tino Lyu</a>
-                    
+          </div>
 
-                    
-                        <span class="post-time">
-                        Date: <a href="#">October 6, 2019&nbsp;&nbsp;19:54:00</a>
-                        </span>
-                    
-                    
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/categories/algorithms/">algorithms</a>
-                            
-                                <a href="/categories/algorithms/notebook/">notebook</a>
-                            
-                        </span>
-                    
-                </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Sorting Algorithms</h1>
             
-        </header>
-
-        <div class="post-content">
-            <p>👾 My learning notes from source: <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/algorithms-part1/home/welcome">Algorithms - Princeton</a><br>👾 You need to add <a target="_blank" rel="noopener" href="https://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a> to your library to compile the codes.  </p>
+            <div class="markdown-body" id="post-body">
+              <p> 👾 My learning notes from source: <a target="_blank" rel="noopener" href="https://www.coursera.org/learn/algorithms-part1/home/welcome">Algorithms - Princeton</a><br> 👾 You need to add <a target="_blank" rel="noopener" href="https://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a> to your library to compile the codes.                                                                                              </p>
 <h1 id="Useful-Sorting-Functions"><a href="#Useful-Sorting-Functions" class="headerlink" title="Useful Sorting Functions"></a>Useful Sorting Functions</h1><p><strong>Less</strong>: Is item v less than w?  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">less</span><span class="params">(Comparable v, Comparable w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> v.compareTo(w) &lt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">less</span><span class="hljs-params">(Comparable v, Comparable w)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">return</span> v.compareTo(w) &lt; <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
 
 <p><strong>Exchange</strong>: Swap item in array a[] at index i with the one at index j.  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">exch</span><span class="params">(Comparable[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span>  <span class="comment">// NOTICE: the type of the array is Comparable.</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Comparable swap = a[i];</span><br><span class="line">	a[i] = a[j];</span><br><span class="line">	a[j] = a[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exch</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> i, <span class="hljs-keyword">int</span> j)</span>  <span class="hljs-comment">// NOTICE: the type of the array is Comparable.</span></span>
+<span class="hljs-function"></span>&#123;
+	Comparable swap = a[i];
+	a[i] = a[j];
+	a[j] = a[i];
+&#125;</code></pre></div>
 
 <h1 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h1><p>That’s so easy. You just need to scan from the begining to the end and find the smallest item, exchange them and do it again and again and again. A little bit boring…😅<br>Selection sort uses (N-1) + (N-2) + … + 1 + 0 ~ <strong>N^2 / 2</strong> compares and <strong>N</strong> exchanges.  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N = a.length;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> min = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; N; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(less(a[j], a[min]) </span><br><span class="line">				min = j;</span><br><span class="line">		&#125;</span><br><span class="line">		exch(a, i, min);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> N = a.length;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)&#123;
+		<span class="hljs-keyword">int</span> min = i;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; N; j++)
+		&#123;
+			<span class="hljs-keyword">if</span>(less(a[j], a[min]) 
+				min = j;
+		&#125;
+		exch(a, i, min);
+	&#125;
+&#125;</code></pre></div>
 
 <h1 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h1><p>Well, that’s also easy…😀  </p>
 <p>But you must know insertion sort performs well when the array is nearly sorted. In insertion sort, we just have to make sure that the part we have already scanned is sorted, the rest part we don’t care.<br>So in iteration i, as long as a[i] is smaller than its left, we swap it and its left item until it is no less then its left.  </p>
 <p>On average, insertion sort uses ~1/4N^2 compares and ~1/4N^2 exchanges. In the worst case, insertion sort uses ~1/2N^2 compares and ~1/2N^2 exchanges. But for <strong>partially sorted arrays</strong>, insertion sort runs in linear time.<br>😅 Sorry I always don’t know how to calculate the average situation, I prefer to use Big-O. And both selection sort and insertion sort are O(n^2).   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N = a.length;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span>; j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(less(a[j], a[j -<span class="number">1</span>])</span><br><span class="line">				exch(a, j, j - <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> N = a.length;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N - <span class="hljs-number">1</span>; i++)
+	&#123;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i; j &gt; <span class="hljs-number">0</span>; j--)
+		&#123;
+			<span class="hljs-keyword">if</span>(less(a[j], a[j -<span class="hljs-number">1</span>])
+				exch(a, j, j - <span class="hljs-number">1</span>);
+			<span class="hljs-keyword">else</span> <span class="hljs-keyword">break</span>;
+		&#125;
+	&#125;
+&#125;</code></pre></div>
 
-<h3 id="Improvement-Shell-Sort"><a href="#Improvement-Shell-Sort" class="headerlink" title="Improvement: Shell Sort"></a>Improvement: Shell Sort</h3><p>Why not make our array partially sorted and than use insertion sort?<br>🤔Shellsort: h-sort array for decreasing sequence of values of h.<br><img src="https://upload.cc/i1/2019/10/07/DlkZeV.png" alt="3-sorting">  </p>
+<h3 id="Improvement-Shell-Sort"><a href="#Improvement-Shell-Sort" class="headerlink" title="Improvement: Shell Sort"></a>Improvement: Shell Sort</h3><p>Why not make our array partially sorted and than use insertion sort?<br>🤔Shellsort: h-sort array for decreasing sequence of values of h.<br><img src="https://upload.cc/i1/2019/10/07/DlkZeV.png" srcset="/img/loading.gif" alt="3-sorting">  </p>
 <p>Which increment sequence to use?  <strong>3x + 1</strong> (1, 4, 13, 40, 121, 364, …)  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N = a.length;</span><br><span class="line">	<span class="keyword">int</span> h = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(h &lt; N / <span class="number">3</span>) h = <span class="number">3</span> * h + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(h &gt;= <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = h; i &lt; N; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j = i;</span><br><span class="line">			<span class="keyword">while</span>(j &gt;= h &amp;&amp; less(a[j], a[j - h]) </span><br><span class="line">				exch(a, j, j - h);</span><br><span class="line">				j -= h;</span><br><span class="line">			<span class="comment">// for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j - h]) ; j-=h) exch(a, j, j - h);</span></span><br><span class="line">		&#125;</span><br><span class="line">		h = h / <span class="number">3</span>;  <span class="comment">// When h = 1, it&#x27;s insertion sort.</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> N = a.length;
+	<span class="hljs-keyword">int</span> h = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">while</span>(h &lt; N / <span class="hljs-number">3</span>) h = <span class="hljs-number">3</span> * h + <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">while</span>(h &gt;= <span class="hljs-number">1</span>)
+	&#123;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = h; i &lt; N; i++)
+		&#123;
+			<span class="hljs-keyword">int</span> j = i;
+			<span class="hljs-keyword">while</span>(j &gt;= h &amp;&amp; less(a[j], a[j - h]) 
+				exch(a, j, j - h);
+				j -= h;
+			<span class="hljs-comment">// for(int j = i; j &gt;= h &amp;&amp; less(a[j], a[j - h]) ; j-=h) exch(a, j, j - h);</span>
+		&#125;
+		h = h / <span class="hljs-number">3</span>;  <span class="hljs-comment">// When h = 1, it&#x27;s insertion sort.</span>
+	&#125;
+&#125;</code></pre></div>
 <p>The worst-case number of compares used by shellsort with 3x+1 increment is <strong>O( N^(3/2) )</strong></p>
 <h1 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h1><p>As its name, there are two steps in the merge sort (omg, just TWO steps) - merge and sort.  </p>
-<h3 id="STEP-ONE-Merge"><a href="#STEP-ONE-Merge" class="headerlink" title="STEP ONE: Merge"></a>STEP ONE: Merge</h3><p>Consider this question, when there are two already sorted array, assigned a[i] and b[j], and we want to sort them into one big array. This is a simple question, you need two pointers and find which pointer is pointed to a smaller item, select this element and add this pointer. And also, we need extra space to store that element.<br>Now consider the same question in one single array.<br><img src="https://upload.cc/i1/2019/10/07/4957Hm.png" alt="enter description here"><br>We need to sort these two parts and get a full-sorted array. Given two sorted subarrays a[lo] to a[mid] and a[mid+1] to a[hi], replace with sorted subarray a[lo] to a[hi]. This is <strong>merge</strong>.  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(Comparable[] a, Comparable[] aux, <span class="keyword">int</span> lo, <span class="keyword">int</span> mid, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = lo; k &lt;= hi; k++)</span><br><span class="line">	&#123;</span><br><span class="line">		aux[k] = a[k];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> i = lo, j = mid + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = lo; k &lt;= hi; k++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(i &gt; mid) a[k] = a[j++];  <span class="comment">// When all the items in the left part have been added to the final array.</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(j &gt; hi) a[k] = a[i++]; <span class="comment">// When all the items in the right part have been added to the final array.</span></span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(less(aux[i], aux[j]) a[k] = a[i++];</span><br><span class="line">		<span class="keyword">else</span> a[k] = a[j++];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STEP-ONE-Merge"><a href="#STEP-ONE-Merge" class="headerlink" title="STEP ONE: Merge"></a>STEP ONE: Merge</h3><p>Consider this question, when there are two already sorted array, assigned a[i] and b[j], and we want to sort them into one big array. This is a simple question, you need two pointers and find which pointer is pointed to a smaller item, select this element and add this pointer. And also, we need extra space to store that element.<br>Now consider the same question in one single array.<br><img src="https://upload.cc/i1/2019/10/07/4957Hm.png" srcset="/img/loading.gif" alt="enter description here"><br>We need to sort these two parts and get a full-sorted array. Given two sorted subarrays a[lo] to a[mid] and a[mid+1] to a[hi], replace with sorted subarray a[lo] to a[hi]. This is <strong>merge</strong>.  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(Comparable[] a, Comparable[] aux, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> mid, <span class="hljs-keyword">int</span> hi)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = lo; k &lt;= hi; k++)
+	&#123;
+		aux[k] = a[k];
+	&#125;
+	<span class="hljs-keyword">int</span> i = lo, j = mid + <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = lo; k &lt;= hi; k++)
+	&#123;
+		<span class="hljs-keyword">if</span>(i &gt; mid) a[k] = a[j++];  <span class="hljs-comment">// When all the items in the left part have been added to the final array.</span>
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(j &gt; hi) a[k] = a[i++]; <span class="hljs-comment">// When all the items in the right part have been added to the final array.</span>
+		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(less(aux[i], aux[j]) a[k] = a[i++];
+		<span class="hljs-keyword">else</span> a[k] = a[j++];
+	&#125;
+&#125;</code></pre></div>
 
-<h3 id="STEP-TWO-Sort"><a href="#STEP-TWO-Sort" class="headerlink" title="STEP TWO: Sort"></a>STEP TWO: Sort</h3><p><img src="https://www.smbc-comics.com/comics/1562409923-20190706.png" alt="Recursion"><br>Merge sort uses recursion and I’m really not good at recursion😣.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a, Comparable[] aux, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(lo == hi) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> mid = lo + (hi - lo) / <span class="number">2</span>;</span><br><span class="line">	sort(a, aux, lo, mid);</span><br><span class="line">	sort(a, aux, mid + <span class="number">1</span>, hi);</span><br><span class="line">	merge(a, aux, lo, mid, hi);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Comparable[] aux = <span class="keyword">new</span> Comparable[a.length];  <span class="comment">// You don&#x27;t have to initialize aux each time.</span></span><br><span class="line">	sort(a, aux, <span class="number">0</span>, a.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STEP-TWO-Sort"><a href="#STEP-TWO-Sort" class="headerlink" title="STEP TWO: Sort"></a>STEP TWO: Sort</h3><p><img src="https://www.smbc-comics.com/comics/1562409923-20190706.png" srcset="/img/loading.gif" alt="Recursion"><br>Merge sort uses recursion and I’m really not good at recursion😣.</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a, Comparable[] aux, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>&#123;
+	<span class="hljs-keyword">if</span>(lo == hi) <span class="hljs-keyword">return</span>;
+	<span class="hljs-keyword">int</span> mid = lo + (hi - lo) / <span class="hljs-number">2</span>;
+	sort(a, aux, lo, mid);
+	sort(a, aux, mid + <span class="hljs-number">1</span>, hi);
+	merge(a, aux, lo, mid, hi);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>
+<span class="hljs-function"></span>&#123;
+	Comparable[] aux = <span class="hljs-keyword">new</span> Comparable[a.length];  <span class="hljs-comment">// You don&#x27;t have to initialize aux each time.</span>
+	sort(a, aux, <span class="hljs-number">0</span>, a.length - <span class="hljs-number">1</span>);
+&#125;</code></pre></div>
 <h3 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h3><p>Merge sort uses at most NlgN compares and extra sapce proportional to N.</p>
 <ol>
 <li>Use insertion sort for small subarrays. Cutoff to insertion sort for ~7 items.</li>
 <li>Stop if already sorted. Is biggest item in first half &lt;= smallest item in second half?</li>
 <li>Eliminate the copy to the auxiliary array. Save time, not space. Switching the role of the input and auxiliary array in each recursive call.</li>
 </ol>
-<h3 id="No-recursive-Bottom-up-mergesort"><a href="#No-recursive-Bottom-up-mergesort" class="headerlink" title="No recursive?  Bottom-up mergesort"></a>No recursive?  Bottom-up mergesort</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N = a.length;</span><br><span class="line">	Comparable[] a = <span class="keyword">new</span> Comparable[a.length];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> sz = <span class="number">1</span>; sz &lt; N; sz = sz + sz)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> lo = <span class="number">0</span>; lo &lt; N - sz + <span class="number">1</span>; lo += sz)</span><br><span class="line">		&#123;</span><br><span class="line">			merge(a, aux, lo, lo + sz - <span class="number">1</span>, Math.min(lo + sz + sz - <span class="number">1</span>, N-<span class="number">1</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="No-recursive-Bottom-up-mergesort"><a href="#No-recursive-Bottom-up-mergesort" class="headerlink" title="No recursive?  Bottom-up mergesort"></a>No recursive?  Bottom-up mergesort</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> N = a.length;
+	Comparable[] a = <span class="hljs-keyword">new</span> Comparable[a.length];
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> sz = <span class="hljs-number">1</span>; sz &lt; N; sz = sz + sz)
+	&#123;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>; lo &lt; N - sz + <span class="hljs-number">1</span>; lo += sz)
+		&#123;
+			merge(a, aux, lo, lo + sz - <span class="hljs-number">1</span>, Math.min(lo + sz + sz - <span class="hljs-number">1</span>, N-<span class="hljs-number">1</span>));
+		&#125;
+	&#125;
+&#125;</code></pre></div>
 
 
-<h1 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h1><h3 id="STEP-ONE-Shuffle-the-array"><a href="#STEP-ONE-Shuffle-the-array" class="headerlink" title="STEP ONE:  Shuffle the array"></a>STEP ONE:  Shuffle the array</h3><p><img src="https://upload.cc/i1/2019/10/07/fnmMWh.png"><br>Make the array randomly sorted. For instance, if the array is increased, it would be inefficient, patitioning doesn’t do anything. Why not use insertion sort in this case?  </p>
+<h1 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h1><h3 id="STEP-ONE-Shuffle-the-array"><a href="#STEP-ONE-Shuffle-the-array" class="headerlink" title="STEP ONE:  Shuffle the array"></a>STEP ONE:  Shuffle the array</h3><p><img src="https://upload.cc/i1/2019/10/07/fnmMWh.png" srcset="/img/loading.gif"><br>Make the array randomly sorted. For instance, if the array is increased, it would be inefficient, patitioning doesn’t do anything. Why not use insertion sort in this case?  </p>
 <p>*<strong>Knuth Shuffle</strong>: In iteration i, pick integer r between 0 and i uniformly at random.*</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Public <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shuffle</span><span class="params">(Obeject[] a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> N = a.length;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> r = StdRandom.uniform(i + <span class="number">1</span>);   </span><br><span class="line">		<span class="comment">// Generate random number rom the beginning to current location. NOTICE: not from 0 to N-1, but from i to N-1 is OK.</span></span><br><span class="line">		exch(a, i , r);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shuffle</span><span class="hljs-params">(Obeject[] a)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> N = a.length;
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)
+	&#123;
+		<span class="hljs-keyword">int</span> r = StdRandom.uniform(i + <span class="hljs-number">1</span>);   
+		<span class="hljs-comment">// Generate random number rom the beginning to current location. NOTICE: not from 0 to N-1, but from i to N-1 is OK.</span>
+		exch(a, i , r);
+	&#125;
+&#125;</code></pre></div>
 
-<h3 id="STEP-TWO-Partition"><a href="#STEP-TWO-Partition" class="headerlink" title="STEP TWO:  Partition"></a>STEP TWO:  Partition</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = lo, j = hi + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(less(a[++i], a[lo]))</span><br><span class="line">			<span class="keyword">if</span>(i == hi) <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">while</span>(less(a[lo], a[--j]))</span><br><span class="line">			<span class="keyword">if</span>(j == lo) <span class="keyword">break</span>;</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">if</span>(i &gt;= j) <span class="keyword">break</span>;</span><br><span class="line">		exch(a, i , j);</span><br><span class="line">	&#125;</span><br><span class="line">	exch(a, lo, j);</span><br><span class="line">	<span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STEP-TWO-Partition"><a href="#STEP-TWO-Partition" class="headerlink" title="STEP TWO:  Partition"></a>STEP TWO:  Partition</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> i = lo, j = hi + <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>)
+	&#123;
+		<span class="hljs-keyword">while</span>(less(a[++i], a[lo]))
+			<span class="hljs-keyword">if</span>(i == hi) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">while</span>(less(a[lo], a[--j]))
+			<span class="hljs-keyword">if</span>(j == lo) <span class="hljs-keyword">break</span>;
+			
+		<span class="hljs-keyword">if</span>(i &gt;= j) <span class="hljs-keyword">break</span>;
+		exch(a, i , j);
+	&#125;
+	exch(a, lo, j);
+	<span class="hljs-keyword">return</span> j;
+&#125;</code></pre></div>
 
-<h3 id="STEP-THREE-Sort"><a href="#STEP-THREE-Sort" class="headerlink" title="STEP THREE:  Sort"></a>STEP THREE:  Sort</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(hi &lt;= lo) <span class="keyword">return</span>;  </span><br><span class="line">	<span class="comment">//So we can see if there is one element in this time of sorting, it will straightly return, this helps improve efficiency. </span></span><br><span class="line">	<span class="keyword">int</span> j = partition(a, lo, hi);</span><br><span class="line">	sort(a, lo, j - <span class="number">1</span>);  <span class="comment">//Recursion</span></span><br><span class="line">	sort(a, j + <span class="number">1</span>, hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STEP-THREE-Sort"><a href="#STEP-THREE-Sort" class="headerlink" title="STEP THREE:  Sort"></a>STEP THREE:  Sort</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">if</span>(hi &lt;= lo) <span class="hljs-keyword">return</span>;  
+	<span class="hljs-comment">//So we can see if there is one element in this time of sorting, it will straightly return, this helps improve efficiency. </span>
+	<span class="hljs-keyword">int</span> j = partition(a, lo, hi);
+	sort(a, lo, j - <span class="hljs-number">1</span>);  <span class="hljs-comment">//Recursion</span>
+	sort(a, j + <span class="hljs-number">1</span>, hi);
+&#125;</code></pre></div>
 
-<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p><img src="https://upload.cc/i1/2019/10/07/Ja9Ovg.gif">  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Quick</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		......</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		......</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span>  <span class="comment">//Overload</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		StdRandom.shuffle(a);</span><br><span class="line">		sort(a, <span class="number">0</span>, a.length - <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h3><p><img src="https://upload.cc/i1/2019/10/07/Ja9Ovg.gif" srcset="/img/loading.gif">  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Quick</span></span>
+<span class="hljs-class"></span>&#123;
+	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>
+<span class="hljs-function">	</span>&#123;
+		......
+	&#125;
+	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>
+<span class="hljs-function">	</span>&#123;
+		......
+	&#125;
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a)</span>  <span class="hljs-comment">//Overload</span></span>
+<span class="hljs-function">	</span>&#123;
+		StdRandom.shuffle(a);
+		sort(a, <span class="hljs-number">0</span>, a.length - <span class="hljs-number">1</span>);
+	&#125;
+&#125;</code></pre></div>
 
 <h3 id="Improvement-3-way-quicksort"><a href="#Improvement-3-way-quicksort" class="headerlink" title="Improvement : 3-way quicksort"></a>Improvement : 3-way quicksort</h3><p>When there are lots of duplicate elements in the array, using quick sort is not efficient.<br>😈 <strong>~1/2N^2 compares when all keys are equal.</strong> Since each time, the partition doesn’t work and you have to iterate the other side. Using Dijkstra’s 3-way partitioning.  </p>
 <p><em>Dutch national flag problem</em>: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Dutch_national_flag_problem">https://en.wikipedia.org/wiki/Dutch_national_flag_problem</a><br>😀 <strong>N*lgN when all distinct.</strong>   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(hi &lt;= lo) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> lt = lo, gt = hi;</span><br><span class="line">	Comparable v = a[lo];</span><br><span class="line">	<span class="keyword">int</span> i = lo;</span><br><span class="line">	<span class="keyword">while</span>(i &lt;= gt)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> cmp = a[i].compareTo(v);</span><br><span class="line">		<span class="keyword">if</span>(cmp &lt; <span class="number">0</span>) exch(a, lt++, i++);  <span class="comment">// a[i] &lt; v, exchange a[lt] with a[i], increment both lt and i</span></span><br><span class="line">		<span class="keyword">if</span>(cmp &gt; <span class="number">0</span>) exch(a, i, gt--);  <span class="comment">// a[i] &gt; v, exchange a[gt] with a[i], decrement gt</span></span><br><span class="line">		<span class="keyword">else</span> i++;  <span class="comment">// increment i</span></span><br><span class="line">	&#125;</span><br><span class="line">	sort(a, lo, lt - <span class="number">1</span>);</span><br><span class="line">	sort(a, gt + <span class="number">1</span>, hi);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(Comparable[] a, <span class="hljs-keyword">int</span> lo, <span class="hljs-keyword">int</span> hi)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">if</span>(hi &lt;= lo) <span class="hljs-keyword">return</span>;
+	<span class="hljs-keyword">int</span> lt = lo, gt = hi;
+	Comparable v = a[lo];
+	<span class="hljs-keyword">int</span> i = lo;
+	<span class="hljs-keyword">while</span>(i &lt;= gt)
+	&#123;
+		<span class="hljs-keyword">int</span> cmp = a[i].compareTo(v);
+		<span class="hljs-keyword">if</span>(cmp &lt; <span class="hljs-number">0</span>) exch(a, lt++, i++);  <span class="hljs-comment">// a[i] &lt; v, exchange a[lt] with a[i], increment both lt and i</span>
+		<span class="hljs-keyword">if</span>(cmp &gt; <span class="hljs-number">0</span>) exch(a, i, gt--);  <span class="hljs-comment">// a[i] &gt; v, exchange a[gt] with a[i], decrement gt</span>
+		<span class="hljs-keyword">else</span> i++;  <span class="hljs-comment">// increment i</span>
+	&#125;
+	sort(a, lo, lt - <span class="hljs-number">1</span>);
+	sort(a, gt + <span class="hljs-number">1</span>, hi);
+&#125;</code></pre></div>
 
-        </div>
-
-        
-        <section class="post-tags">
+            </div>
+            <hr>
             <div>
-                <span>Tag(s):</span>
-                <span class="tag">
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
-                </span>
+                      <a class="hover-with-bg" href="/categories/algorithms/">algorithms</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/07/2020-01-07-2019%E5%B9%B4%E7%9A%84%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2019年的读书总结</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
             </div>
-            <div>
-                <a href="javascript:window.history.back();">back</a>
-                <span>· </span>
-                <a href="/">home</a>
-            </div>
-        </section>
-        <section class="post-nav">
+
             
-                <a class="prev" rel="prev" href="/2020/01/07/2020-01-07-2019%E5%B9%B4%E7%9A%84%E8%AF%BB%E4%B9%A6%E6%80%BB%E7%BB%93/">2019年的读书总结</a>
-            
-            
-        </section>
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "thqwcPFGRTW9j1UNmKdE5iO2-gzGzoHsz",
+          app_key: "Fhl6gSVw9sbA3F24zl2fjpYR",
+          placeholder: "说点什么",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: false,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    waitElementVisible('vcomments', loadValine);
+  </script>
+  <noscript>Please enable JavaScript to view the <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
 
 
-    </article>
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
 </div>
 
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
         </div>
-        <footer id="footer" class="footer">
-    <div class="copyright">
-        <span>© Tino Lyu | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
 </footer>
 
-    </div>
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Sorting Algorithms&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
