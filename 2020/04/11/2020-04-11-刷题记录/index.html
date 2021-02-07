@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      3.2k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      55
+      56
        分钟
     </span>
   
@@ -652,63 +652,85 @@
     &#125;
 &#125;</code></pre></div>
 
-<h1 id="Other-records"><a href="#Other-records" class="headerlink" title="Other records"></a>Other records</h1><h2 id="Tree-Iterator-without-using-recursion"><a href="#Tree-Iterator-without-using-recursion" class="headerlink" title="Tree Iterator without using recursion"></a>Tree Iterator without using recursion</h2><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">/**</span>
-<span class="hljs-comment"> * Definition of TreeNode:</span>
-<span class="hljs-comment"> * public class TreeNode &#123;</span>
-<span class="hljs-comment"> *     public int val;</span>
-<span class="hljs-comment"> *     public TreeNode left, right;</span>
-<span class="hljs-comment"> *     public TreeNode(int val) &#123;</span>
-<span class="hljs-comment"> *         this.val = val;</span>
-<span class="hljs-comment"> *         this.left = this.right = null;</span>
-<span class="hljs-comment"> *     &#125;</span>
-<span class="hljs-comment"> * &#125;</span>
-<span class="hljs-comment"> * Example of iterate a tree:</span>
-<span class="hljs-comment"> * BSTIterator iterator = new BSTIterator(root);</span>
-<span class="hljs-comment"> * while (iterator.hasNext()) &#123;</span>
-<span class="hljs-comment"> *    TreeNode node = iterator.next();</span>
-<span class="hljs-comment"> *    do something for node</span>
-<span class="hljs-comment"> * &#125; </span>
-<span class="hljs-comment"> */</span>
- 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BSTIterator</span> </span>&#123;
-    <span class="hljs-keyword">private</span> Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
-    
-    <span class="hljs-comment">// @param root: The root of binary tree.</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BSTIterator</span><span class="hljs-params">(TreeNode root)</span> </span>&#123;
-        <span class="hljs-keyword">while</span> (root != <span class="hljs-keyword">null</span>) &#123;
+<h1 id="Other-records"><a href="#Other-records" class="headerlink" title="Other records"></a>Other records</h1><h2 id="非递减数列"><a href="#非递减数列" class="headerlink" title="非递减数列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/non-decreasing-array/">非递减数列</a></h2><p><img src="https://ae01.alicdn.com/kf/U44b9dbd31bf84558879d2f137d0734afY.jpg" srcset="/img/loading.gif"><br>思路： 一道有点迷的简单题，总之就是各种情况都要考虑清楚  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">checkPossibility</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(nums.length == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; nums.length; i++) &#123;
+            <span class="hljs-keyword">if</span>(nums[i] &lt; nums[i - <span class="hljs-number">1</span>]) &#123;
+                cnt++;
+                <span class="hljs-keyword">if</span>(i == <span class="hljs-number">1</span> || nums[i] &gt;= nums[i - <span class="hljs-number">2</span>]) &#123;
+                    nums[i - <span class="hljs-number">1</span>] = nums[i];
+                &#125;
+                <span class="hljs-keyword">else</span> &#123;
+                    nums[i] = nums[i - <span class="hljs-number">1</span>];
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">if</span>(cnt &gt;= <span class="hljs-number">2</span>) &#123;
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    &#125;
+&#125;</code></pre></div>
+
+<h2 id="Tree-Iterator-without-using-recursion"><a href="#Tree-Iterator-without-using-recursion" class="headerlink" title="Tree Iterator without using recursion"></a>Tree Iterator without using recursion</h2><div class="hljs"><pre><code class="java">/**
+ * Definition of TreeNode:
+ * public class TreeNode &#123;
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) &#123;
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     &#125;
+ * &#125;
+ * Example of iterate a tree:
+ * BSTIterator iterator = new BSTIterator(root);
+ * while (iterator.hasNext()) &#123;
+ *    TreeNode node = iterator.next();
+ *    do something for node
+ * &#125; 
+ */
+
+public class BSTIterator &#123;
+    private Stack&lt;TreeNode&gt; stack = new Stack&lt;&gt;();
+
+    // @param root: The root of binary tree.
+    public BSTIterator(TreeNode root) &#123;
+        while (root != null) &#123;
             stack.push(root);
             root = root.left;
         &#125;
     &#125;
 
-    <span class="hljs-comment">//@return: True if there has next node, or false</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">return</span> !stack.isEmpty();
+    //@return: True if there has next node, or false
+    public boolean hasNext() &#123;
+        return !stack.isEmpty();
     &#125;
-    
-    <span class="hljs-comment">//@return: return next node</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;
+
+    //@return: return next node
+    public TreeNode next() &#123;
         TreeNode curt = stack.peek();
         TreeNode node = curt;
-        
-        <span class="hljs-comment">// move to the next node</span>
-        <span class="hljs-keyword">if</span> (node.right == <span class="hljs-keyword">null</span>) &#123;
+
+        // move to the next node
+        if (node.right == null) &#123;
             node = stack.pop();
-            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; stack.peek().right == node) &#123;
+            while (!stack.isEmpty() &amp;&amp; stack.peek().right == node) &#123;
                 node = stack.pop();
             &#125;
-        &#125; <span class="hljs-keyword">else</span> &#123;
+        &#125; else &#123;
             node = node.right;
-            <span class="hljs-keyword">while</span> (node != <span class="hljs-keyword">null</span>) &#123;
+            while (node != null) &#123;
                 stack.push(node);
                 node = node.left;
             &#125;
         &#125;
-        
-        <span class="hljs-keyword">return</span> curt;
+
+        return curt;
     &#125;
 &#125;</code></pre></div>
-
 
             </div>
             <hr>
