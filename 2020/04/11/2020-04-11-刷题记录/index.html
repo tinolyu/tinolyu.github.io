@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.4k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      56
+      59
        分钟
     </span>
   
@@ -672,6 +672,30 @@
             <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
         &#125;
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+    &#125;
+&#125;</code></pre></div>
+
+<h2 id="插入区间"><a href="#插入区间" class="headerlink" title="插入区间"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/insert-interval/">插入区间</a></h2><p><img src="https://ae01.alicdn.com/kf/Ub680c6b75bc641d1b2d14fea5cdc0a15l.jpg" srcset="/img/loading.gif"><br><img src="https://ae01.alicdn.com/kf/U003137da0010459db4a7abadbd3e1364N.jpg" srcset="/img/loading.gif"><br>思路： 考虑三种情况即可</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[][] insert(<span class="hljs-keyword">int</span>[][] intervals, <span class="hljs-keyword">int</span>[] newInterval) &#123;
+        ArrayList&lt;<span class="hljs-keyword">int</span>[]&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        <span class="hljs-keyword">int</span> len = intervals.length;
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (i &lt; len &amp;&amp; intervals[i][<span class="hljs-number">1</span>] &lt; newInterval[<span class="hljs-number">0</span>]) &#123;
+            res.add(intervals[i]);
+            i++;
+        &#125;
+        <span class="hljs-keyword">while</span> (i &lt; len &amp;&amp; intervals[i][<span class="hljs-number">0</span>] &lt;= newInterval[<span class="hljs-number">1</span>]) &#123;
+            newInterval[<span class="hljs-number">0</span>] = Math.min(intervals[i][<span class="hljs-number">0</span>], newInterval[<span class="hljs-number">0</span>]);
+            newInterval[<span class="hljs-number">1</span>] = Math.max(intervals[i][<span class="hljs-number">1</span>], newInterval[<span class="hljs-number">1</span>]);
+            i++;
+        &#125;
+        res.add(newInterval);
+        <span class="hljs-keyword">while</span> (i &lt; len &amp;&amp; intervals[i][<span class="hljs-number">0</span>] &gt; newInterval[<span class="hljs-number">1</span>]) &#123;
+            res.add(intervals[i]);
+            i++;
+        &#125;
+        <span class="hljs-keyword">return</span> res.toArray(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">0</span>][]);
     &#125;
 &#125;</code></pre></div>
 
