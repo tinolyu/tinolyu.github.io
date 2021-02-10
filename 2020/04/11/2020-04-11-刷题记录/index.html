@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      3.8k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      61
+      66
        分钟
     </span>
   
@@ -709,30 +709,119 @@
     &#125;
 &#125;</code></pre></div>
 
-<h2 id="插入区间"><a href="#插入区间" class="headerlink" title="插入区间"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/insert-interval/">插入区间</a></h2><p><img src="https://ae01.alicdn.com/kf/Ub680c6b75bc641d1b2d14fea5cdc0a15l.jpg" srcset="/img/loading.gif"><br><img src="https://ae01.alicdn.com/kf/U003137da0010459db4a7abadbd3e1364N.jpg" srcset="/img/loading.gif"><br>思路： 考虑三种情况即可</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[][] insert(<span class="hljs-keyword">int</span>[][] intervals, <span class="hljs-keyword">int</span>[] newInterval) &#123;
-        ArrayList&lt;<span class="hljs-keyword">int</span>[]&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
-        <span class="hljs-keyword">int</span> len = intervals.length;
-        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (i &lt; len &amp;&amp; intervals[i][<span class="hljs-number">1</span>] &lt; newInterval[<span class="hljs-number">0</span>]) &#123;
+
+<h2 id="LRU-缓存机制"><a href="#LRU-缓存机制" class="headerlink" title="LRU 缓存机制"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU 缓存机制</a></h2><p><img src="https://s3.ax1x.com/2021/02/10/y0dYJs.png" srcset="/img/loading.gif"><br>思路： LinkedHashMap，key为键值，value为链表中的节点  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LRUCache</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> capacity;
+    <span class="hljs-keyword">private</span> Map&lt;Integer, DLinkedNode&gt; map;
+    <span class="hljs-keyword">private</span> DLinkedNode head;
+    <span class="hljs-keyword">private</span> DLinkedNode tail;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DLinkedNode</span> </span>&#123;
+        DLinkedNode prev;
+        DLinkedNode next;
+        <span class="hljs-keyword">int</span> key;
+        <span class="hljs-keyword">int</span> value;
+
+        DLinkedNode() &#123;
+        &#125;
+        DLinkedNode(<span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> value) &#123;
+            <span class="hljs-keyword">this</span>.value = value;
+            <span class="hljs-keyword">this</span>.key = key;
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LRUCache</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;
+        map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+        <span class="hljs-keyword">this</span>.capacity = capacity;
+        head = <span class="hljs-keyword">new</span> DLinkedNode();
+        tail = <span class="hljs-keyword">new</span> DLinkedNode();
+        head.next = tail;
+        tail.prev = head;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(map.get(key) == <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        &#125;
+        moveToHead(map.get(key));
+        <span class="hljs-keyword">return</span> map.get(key).value;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> value)</span> </span>&#123;
+        <span class="hljs-keyword">if</span>(map.get(key) == <span class="hljs-keyword">null</span>) &#123;
+            size++;
+            DLinkedNode newNode = <span class="hljs-keyword">new</span> DLinkedNode(key, value);
+            addToHead(newNode);
+            map.put(key, newNode);
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            map.get(key).value = value;
+            moveToHead(map.get(key));
+        &#125;
+        
+        <span class="hljs-keyword">if</span>(size &gt; capacity) &#123;
+            <span class="hljs-keyword">int</span> removeKey = removeTail();
+            map.put(removeKey, <span class="hljs-keyword">null</span>);
+            size--;
+        &#125;
+
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addToHead</span><span class="hljs-params">(DLinkedNode node)</span> </span>&#123;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+        node.prev = head;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveToHead</span><span class="hljs-params">(DLinkedNode node)</span> </span>&#123;
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        addToHead(node);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">removeTail</span><span class="hljs-params">()</span> </span>&#123;
+        DLinkedNode removeNode = tail.prev;
+        tail.prev.prev.next = tail;
+        tail.prev = tail.prev.prev;
+        <span class="hljs-keyword">return</span> removeNode.key;
+    &#125;
+
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Your LRUCache object will be instantiated and called as such:</span>
+<span class="hljs-comment"> * LRUCache obj = new LRUCache(capacity);</span>
+<span class="hljs-comment"> * int param_1 = obj.get(key);</span>
+<span class="hljs-comment"> * obj.put(key,value);</span>
+<span class="hljs-comment"> */</span></code></pre></div>
+
+<h2 id="插入区间"><a href="#插入区间" class="headerlink" title="插入区间"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/insert-interval/">插入区间</a></h2><p><img src="https://ae01.alicdn.com/kf/Ub680c6b75bc641d1b2d14fea5cdc0a15l.jpg" srcset="/img/loading.gif"><br><img src="https://ae01.alicdn.com/kf/U003137da0010459db4a7abadbd3e1364N.jpg" srcset="/img/loading.gif"><br>思路： 考虑三种情况即可  </p>
+<div class="hljs"><pre><code class="java">class Solution &#123;
+    public int[][] insert(int[][] intervals, int[] newInterval) &#123;
+        ArrayList&lt;int[]&gt; res = new ArrayList&lt;&gt;();
+        int len = intervals.length;
+        int i = 0;
+        while (i &lt; len &amp;&amp; intervals[i][1] &lt; newInterval[0]) &#123;
             res.add(intervals[i]);
             i++;
         &#125;
-        <span class="hljs-keyword">while</span> (i &lt; len &amp;&amp; intervals[i][<span class="hljs-number">0</span>] &lt;= newInterval[<span class="hljs-number">1</span>]) &#123;
-            newInterval[<span class="hljs-number">0</span>] = Math.min(intervals[i][<span class="hljs-number">0</span>], newInterval[<span class="hljs-number">0</span>]);
-            newInterval[<span class="hljs-number">1</span>] = Math.max(intervals[i][<span class="hljs-number">1</span>], newInterval[<span class="hljs-number">1</span>]);
+        while (i &lt; len &amp;&amp; intervals[i][0] &lt;= newInterval[1]) &#123;
+            newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
+            newInterval[1] = Math.max(intervals[i][1], newInterval[1]);
             i++;
         &#125;
         res.add(newInterval);
-        <span class="hljs-keyword">while</span> (i &lt; len &amp;&amp; intervals[i][<span class="hljs-number">0</span>] &gt; newInterval[<span class="hljs-number">1</span>]) &#123;
+        while (i &lt; len &amp;&amp; intervals[i][0] &gt; newInterval[1]) &#123;
             res.add(intervals[i]);
             i++;
         &#125;
-        <span class="hljs-keyword">return</span> res.toArray(<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">0</span>][]);
+        return res.toArray(new int[0][]);
     &#125;
 &#125;</code></pre></div>
-
 <h2 id="Tree-Iterator-without-using-recursion"><a href="#Tree-Iterator-without-using-recursion" class="headerlink" title="Tree Iterator without using recursion"></a>Tree Iterator without using recursion</h2><div class="hljs"><pre><code class="java">/**
  * Definition of TreeNode:
  * public class TreeNode &#123;
