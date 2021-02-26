@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      66
+      68
        分钟
     </span>
   
@@ -376,7 +376,7 @@
     &#125;    
 &#125;</code></pre></div>
 
-<h2 id="Sort-Colors-II"><a href="#Sort-Colors-II" class="headerlink" title="Sort Colors II"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/sort-colors-ii/description">Sort Colors II</a></h2><p>Description:<br>Given an array of n objects with k different colors (numbered from 1 to k), sort them so that objects of the same color are adjacent, with the colors in the order 1, 2, … k.<br><img src="https://uploadpicuse.blob.core.windows.net/pictures/1588749539(1).png" srcset="/img/loading.gif"><br>思路：类似于快速排序，根据中间的颜色的数partition，左边小于中间的颜色，右边大于中间的颜色，然后两边继续做同样的操作。  </p>
+<h2 id="Sort-Colors-II"><a href="#Sort-Colors-II" class="headerlink" title="Sort Colors II"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/sort-colors-ii/description">Sort Colors II</a></h2><p>Description:<br>Given an array of n objects with k different colors (numbered from 1 to k), sort them so that objects of the same color are adjacent, with the colors in the order 1, 2, … k.<br><img src="https://ae01.alicdn.com/kf/Ue9522c9970c54102897b644926e069ffP.jpg" srcset="/img/loading.gif"><br>思路：类似于快速排序，根据中间的颜色的数partition，左边小于中间的颜色，右边大于中间的颜色，然后两边继续做同样的操作。  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> colors: A list of integer</span>
@@ -414,7 +414,7 @@
     &#125;
 &#125;</code></pre></div>
 
-<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="Paint-House"><a href="#Paint-House" class="headerlink" title="Paint House"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/paint-house/description">Paint House</a></h2><p>Description:<br>There are a row of n houses, each house can be painted with one of the three colors: red, blue or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color, and you need to cost the least. Return the minimum cost.<br>The cost of painting each house with a certain color is represented by a n x 3 cost matrix. For example, costs[0][0] is the cost of painting house 0 with color red; costs[1][2] is the cost of painting house 1 with color green, and so on… Find the minimum cost to paint all houses.<br><img src="https://uploadpicuse.blob.core.windows.net/pictures/68747470733a2f2f75706c6f61642e63632f69312f323032302f30342f31322f46564a714d672e706e67.png" srcset="/img/loading.gif"><br>思路：使用动态规划，第i个房子的颜色与第i-1个房子的颜色不同，且为涂到第i-1个房子的费用最小值+第i个房子的费用。建立二维数组，helper[i][j]代表第i个房子涂第j个颜色时的总费用最小值。<br>转移方程为：f[i][j] = min{f[n-1][k]} + costs[i][j != k]<br>(可以使用[2][3]的滚动数组节省空间，第i个房子的颜色/费用只与第i-1个房子的颜色/费用有关)</p>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="Paint-House"><a href="#Paint-House" class="headerlink" title="Paint House"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/paint-house/description">Paint House</a></h2><p>Description:<br>There are a row of n houses, each house can be painted with one of the three colors: red, blue or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color, and you need to cost the least. Return the minimum cost.<br>The cost of painting each house with a certain color is represented by a n x 3 cost matrix. For example, costs[0][0] is the cost of painting house 0 with color red; costs[1][2] is the cost of painting house 1 with color green, and so on… Find the minimum cost to paint all houses.<br><img src="https://ae01.alicdn.com/kf/U642bc06486f44b749f04548405909129h.jpg" srcset="/img/loading.gif"><br>思路：使用动态规划，第i个房子的颜色与第i-1个房子的颜色不同，且为涂到第i-1个房子的费用最小值+第i个房子的费用。建立二维数组，helper[i][j]代表第i个房子涂第j个颜色时的总费用最小值。<br>转移方程为：f[i][j] = min{f[n-1][k]} + costs[i][j != k]<br>(可以使用[2][3]的滚动数组节省空间，第i个房子的颜色/费用只与第i-1个房子的颜色/费用有关)</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> costs: n x 3 cost matrix</span>
@@ -471,6 +471,25 @@
             &#125;
         &#125;
         <span class="hljs-keyword">return</span> dp[s.length()];
+    &#125;
+&#125;</code></pre></div>
+
+<h2 id="Coin-Change"><a href="#Coin-Change" class="headerlink" title="Coin Change"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">Coin Change</a></h2><p><img src="https://ae01.alicdn.com/kf/Ua808b0c02b99458991e54e44c0d17efdK.jpg" srcset="/img/loading.gif">  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">coinChange</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] coins, <span class="hljs-keyword">int</span> amount)</span> </span>&#123;
+        <span class="hljs-keyword">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[amount + <span class="hljs-number">1</span>];
+        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; amount + <span class="hljs-number">1</span>; i++) &#123;
+            dp[i] = amount + <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> c : coins) &#123;
+                <span class="hljs-keyword">if</span>(i - c &gt;= <span class="hljs-number">0</span>) &#123;
+                    dp[i] = Math.min(dp[i], <span class="hljs-number">1</span> + dp[i - c]);
+                &#125;
+            &#125;
+        &#125;
+
+        <span class="hljs-keyword">return</span> dp[amount] &gt; amount ? -<span class="hljs-number">1</span> : dp[amount];
     &#125;
 &#125;</code></pre></div>
 
