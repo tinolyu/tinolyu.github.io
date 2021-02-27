@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.8k 字
+      4k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      68
+      71
        分钟
     </span>
   
@@ -490,6 +490,29 @@
         &#125;
 
         <span class="hljs-keyword">return</span> dp[amount] &gt; amount ? -<span class="hljs-number">1</span> : dp[amount];
+    &#125;
+&#125;</code></pre></div>
+
+<h2 id="Longest-Palindromic-Subsequence"><a href="#Longest-Palindromic-Subsequence" class="headerlink" title="Longest Palindromic Subsequence"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">Longest Palindromic Subsequence</a></h2><p><img src="https://ae01.alicdn.com/kf/Ue5175d4511fc487b980cb68b68d06af80.jpg" srcset="/img/loading.gif"><br>思路： 使用动态规划，每一种子状态中考虑第一个元素和最后一个元素时候相等，相等则这个状态的结果为dp[first+1][last-1]+2，不相等则它俩不可能同时出现在这段字符的最长回文子序列中，比较dp[first][last - 1]和dp[first + 1][last]  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestPalindromeSubseq</span><span class="hljs-params">(String s)</span> </span>&#123;
+        <span class="hljs-keyword">char</span>[] arr = s.toCharArray();
+        <span class="hljs-keyword">int</span> n = arr.length;
+        <span class="hljs-keyword">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[n][n];
+
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) &#123;
+            dp[i][i] = <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt; n; j++) &#123;
+                <span class="hljs-keyword">if</span>(arr[i] == arr[j]) &#123;
+                    dp[i][j] = dp[i + <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + <span class="hljs-number">2</span>;
+                &#125;
+                <span class="hljs-keyword">else</span> &#123;
+                    dp[i][j] = Math.max(dp[i][j - <span class="hljs-number">1</span>], dp[i + <span class="hljs-number">1</span>][j]);
+                &#125;
+            &#125;
+        &#125;
+
+        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">0</span>][n - <span class="hljs-number">1</span>];
     &#125;
 &#125;</code></pre></div>
 
