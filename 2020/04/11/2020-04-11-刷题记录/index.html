@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4k 字
+      4.2k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      71
+      73
        分钟
     </span>
   
@@ -414,6 +414,7 @@
     &#125;
 &#125;</code></pre></div>
 
+
 <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="Paint-House"><a href="#Paint-House" class="headerlink" title="Paint House"></a><a target="_blank" rel="noopener" href="https://www.lintcode.com/problem/paint-house/description">Paint House</a></h2><p>Description:<br>There are a row of n houses, each house can be painted with one of the three colors: red, blue or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color, and you need to cost the least. Return the minimum cost.<br>The cost of painting each house with a certain color is represented by a n x 3 cost matrix. For example, costs[0][0] is the cost of painting house 0 with color red; costs[1][2] is the cost of painting house 1 with color green, and so on… Find the minimum cost to paint all houses.<br><img src="https://ae01.alicdn.com/kf/U642bc06486f44b749f04548405909129h.jpg" srcset="/img/loading.gif"><br>思路：使用动态规划，第i个房子的颜色与第i-1个房子的颜色不同，且为涂到第i-1个房子的费用最小值+第i个房子的费用。建立二维数组，helper[i][j]代表第i个房子涂第j个颜色时的总费用最小值。<br>转移方程为：f[i][j] = min{f[n-1][k]} + costs[i][j != k]<br>(可以使用[2][3]的滚动数组节省空间，第i个房子的颜色/费用只与第i-1个房子的颜色/费用有关)</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-comment">/**</span>
@@ -629,7 +630,7 @@
 &#125;</code></pre></div>
 
 
-<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><h2 id="每日温度"><a href="#每日温度" class="headerlink" title="每日温度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/daily-temperatures/">每日温度</a></h2><p><img src="https://s1.ax1x.com/2020/08/03/adKrSP.png" srcset="/img/loading.gif"><br>解法一：单调栈  </p>
+<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h2 id="每日温度"><a href="#每日温度" class="headerlink" title="每日温度"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/daily-temperatures/">每日温度</a></h2><p><img src="https://s1.ax1x.com/2020/08/03/adKrSP.png" srcset="/img/loading.gif"><br>解法一：单调栈  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] dailyTemperatures(<span class="hljs-keyword">int</span>[] T) &#123;
         <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[T.length];
@@ -674,6 +675,29 @@
         <span class="hljs-keyword">return</span> result;
     &#125;
 &#125;</code></pre></div>
+
+<h2 id="验证二叉树的前序序列化"><a href="#验证二叉树的前序序列化" class="headerlink" title="验证二叉树的前序序列化"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/">验证二叉树的前序序列化</a></h2><p><img src="https://ae01.alicdn.com/kf/U86cd96996a794c6d9db882f2ff1317edU.jpg" srcset="/img/loading.gif"><br>思路：使用栈，遇到#将栈顶元素减1，遇到数字将栈顶元素减1后再push进2，相当于判断节点的子节点数量；把栈中元素看成一个整体，即所有剩余槽位的数量，可以将空间复杂度降至O(1)</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValidSerialization</span><span class="hljs-params">(String preorder)</span> </span>&#123;
+        String[] arr = preorder.split(<span class="hljs-string">&quot;,&quot;</span>);
+        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();
+        stack.push(<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; arr.length; i++) &#123;
+            <span class="hljs-keyword">if</span>(stack.isEmpty()) &#123;
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+            &#125;
+            <span class="hljs-keyword">int</span> head = stack.pop() - <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">if</span>(head &gt; <span class="hljs-number">0</span>) &#123;
+                stack.push(head);
+            &#125;
+            <span class="hljs-keyword">if</span>(!<span class="hljs-string">&quot;#&quot;</span>.equals(arr[i])) &#123;
+                stack.push(<span class="hljs-number">2</span>);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> stack.isEmpty();
+    &#125;
+&#125;</code></pre></div>
+
 
 <h1 id="BFS-amp-DFS"><a href="#BFS-amp-DFS" class="headerlink" title="BFS &amp; DFS"></a>BFS &amp; DFS</h1><h2 id="全排列"><a href="#全排列" class="headerlink" title="全排列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">全排列</a></h2><p><img src="https://s1.ax1x.com/2020/08/06/aR33Q0.png" srcset="/img/loading.gif"><br>思路：回溯法 + DFS，每次递归前将该数字设为used，递归结束后回溯到原来not used的状态  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
