@@ -159,7 +159,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.5k 字
+      4.6k 字
     </span>
   
 
@@ -169,7 +169,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      79
+      81
        分钟
     </span>
   
@@ -852,6 +852,29 @@
     &#125;
 &#125;</code></pre></div>
 
+
+
+<h2 id="最长连续序列"><a href="#最长连续序列" class="headerlink" title="最长连续序列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-consecutive-sequence/">最长连续序列</a></h2><p><img src="https://ae01.alicdn.com/kf/Ucd47d47483e8419ab43b2f436d2d82a1r.jpg" srcset="/img/loading.gif"><br>思路： 检查是否有num-1的数存在  </p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;
+        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> HashSet&lt;&gt;();
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i : nums) &#123;
+            set.add(i);
+        &#125;
+        <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i : set) &#123;
+            <span class="hljs-keyword">if</span>(!set.contains(i - <span class="hljs-number">1</span>)) &#123;
+                <span class="hljs-keyword">int</span> current = i, currentLen = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">while</span>(set.contains(current + <span class="hljs-number">1</span>)) &#123;
+                    current += <span class="hljs-number">1</span>;
+                    currentLen += <span class="hljs-number">1</span>;
+                &#125;
+                max = Math.max(currentLen, max);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> max;
+    &#125;
+&#125;</code></pre></div>
 
 <h2 id="LRU-缓存机制"><a href="#LRU-缓存机制" class="headerlink" title="LRU 缓存机制"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache/">LRU 缓存机制</a></h2><p><img src="https://s3.ax1x.com/2021/02/10/y0dYJs.png" srcset="/img/loading.gif"><br>思路： LinkedHashMap，key为键值，value为链表中的节点  </p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LRUCache</span> </span>&#123;
